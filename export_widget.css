@@ -1,0 +1,63 @@
+/*
+Jive - Export Widget
+
+Copyright (c) 2015 Fidelity Investments
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+FILE DESCRIPTION
+This is the CSS library that styles the Export widget.
+
+WIDGET DESCRIPTION
+This Jive HTML widget allows users to export followers for people and places as well as export 
+event attendee lists with the Jive email for each user.
+*/
+#fidosreg {
+	string-set: 'b764a0a9536448345dc227af95e192521d337b5e4c3560c859b89ecd0407004a';
+}
+
+#mainContainer 	{
+	border-width: 2px;
+	border-style: solid;
+	border-color: rgb(187, 187, 187) rgb(187, 187, 187) rgb(218, 218, 218);
+	border-radius: 7px 7px 7px 7px;
+	padding: 10px;
+}
+
+body {
+	padding: 15px;
+}
+
+h4 {
+	color: #3366FF;
+}	
+
+#resultsDiv {
+	border-radius: 5px 5px 5px 5px; 
+	width: 100%;
+	background-color: rgb(255, 255, 255);
+	padding: 4px;
+	margin: 4px;
+}
+
+#searchBoxes {
+	background-color: rgb(242, 242, 242);
+	border: 1px solid rgb(204, 204, 204);
+	border-radius: 5px 5px 5px 5px;
+	padding: 10px;
+	padding-bottom: 25px;
+}
+
+textarea {
+	width: 80%;
+	height: 400px;
+}
