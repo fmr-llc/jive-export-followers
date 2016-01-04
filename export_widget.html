@@ -1,0 +1,81 @@
+<!--
+Jive - Export Widget
+
+Copyright (c) 2015 Fidelity Investments
+Licensed under the Apache License, Version 2.0 (the "License");
+you may not use this file except in compliance with the License.
+You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+Unless required by applicable law or agreed to in writing, software
+distributed under the License is distributed on an "AS IS" BASIS,
+WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+See the License for the specific language governing permissions and
+limitations under the License.
+
+
+FILE DESCRIPTION
+This is the HTML widget code for the Export widget.
+
+WIDGET DESCRIPTION
+This Jive HTML widget allows users to export followers for people and places as well as export 
+event attendee lists with the Jive email for each user.
+-->
+<meta name="fidosreg" content="b764a0a9536448345dc227af95e192521d337b5e4c3560c859b89ecd0407004a">
+
+<script src='/resources/scripts/jquery/jquery.js'></script>
+<script>
+
+var library_loader_content_id = "0";
+
+$j("head").append('<scr'+'ipt src="/api/core/v3/attachments/file/' + library_loader_content_id + '/data"></scr'+'ipt>');
+</script>
+<script>
+$j.include_library('bootstrap.min.css');
+$j.include_library('bootstrap-theme.min.css');
+$j.include_library('export_widget.css');
+$j.include_library('bootstrap.min.js');
+$j.include_library('export_widget.js');
+</script>
+
+<div id='mainContainer' class="form-horizontal">
+	<legend class="text-center">Export</legend>
+
+	<div id="initDiv" class="text-center">
+		<button class='btn btn-info btn-small' id='person_button' onclick='exportPerson()'>Person</button>
+		<button class='btn btn-info btn-small' id='place_button' onclick='exportPlace()'>Place</button>
+		<button class='btn btn-info btn-small' id='blog_button' onclick='exportBlog()'>Blog</button>
+		<button class='btn btn-info btn-small' id='event_button' onclick='exportEvent()'>Event</button>
+	</div>
+		
+	<div id='searchDiv' class="text-center" style='display:none;'>
+		<p>
+			<span id='getContainerStatus'></span>
+		</p> 
+		<p>
+			<input id='search_criteria' type='text' placeholder='Enter search criteria'>
+				<Button id='lookupButton' class='btn btn-info btn-small' onclick="lookup()">Lookup</Button>
+			</input>
+		</p>
+		<button class='btn btn-info btn-small' id='cancel_search_button' onclick='cancel()'>Cancel</button>
+	</div>
+
+	<div id="processingDiv" class="text-center" style='display:none;'>
+		<p><img alt="" src="/images/jive-image-loading.gif"> Processing...</p>
+	</div>
+
+	<div id="resultsDiv" class="text-center" style='display:none;'>
+		<div id="searchResults"  class="list-group"></div>
+		<button class='btn btn-info btn-small' id='export_button' onclick='exportFollowers()'>Export</button>
+		<button class='btn btn-info btn-small' id='cancel_results_button' onclick='cancel()'>Cancel</button>
+	</div>
+
+	<div id='followersDiv' style='display:none'>
+		<p>Copy the following list and save it to a .csv file on your computer.  You can then work with the list in Excel</p>
+		<textarea id="follower_export" class="form-control" name="textarea" placeholder="" style="height: 400px;"></textarea>
+		<p> </p>
+		<button class='btn btn-info btn-small' id='cancel_generate_button' onclick='cancel()'>Done</button>
+	</div>
+
+</div>
