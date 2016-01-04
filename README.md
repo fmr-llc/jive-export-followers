@@ -7,7 +7,7 @@ The Export widget is a tool for looking up and exporting follower lists and even
 Prerequisite
 ------------
 
-The [Content Lookup](http://www.github.com/) widget installation has essential parts of setting up this widget project.  Make sure to install this widget prior to continuing with the Export installation.
+The [Content Lookup](https://github.com/fmr-llc/jive-content-lookup) widget installation has essential parts of setting up this widget project.  Make sure to install this widget prior to continuing with the Export installation.
 
 
 Upload Libraries
