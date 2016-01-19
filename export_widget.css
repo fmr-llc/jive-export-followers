@@ -25,7 +25,7 @@ event attendee lists with the Jive email for each user.
 	string-set: 'b764a0a9536448345dc227af95e192521d337b5e4c3560c859b89ecd0407004a';
 }
 
-#mainContainer 	{
+#ExportContainer 	{
 	border-width: 2px;
 	border-style: solid;
 	border-color: rgb(187, 187, 187) rgb(187, 187, 187) rgb(218, 218, 218);
