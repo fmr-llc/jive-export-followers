@@ -24,22 +24,17 @@ event attendee lists with the Jive email for each user.
 -->
 <meta name="fidosreg" content="b764a0a9536448345dc227af95e192521d337b5e4c3560c859b89ecd0407004a">
 
-<script src='/resources/scripts/jquery/jquery.js'></script>
+<script src='JQUERY'></script>
+<script src='LIBRARY LOADER'></script>
 <script>
-
-var library_loader_content_id = "0";
-
-$j("head").append('<scr'+'ipt src="/api/core/v3/attachments/file/' + library_loader_content_id + '/data"></scr'+'ipt>');
-</script>
-<script>
-$j.include_library('bootstrap.min.css');
-$j.include_library('bootstrap-theme.min.css');
-$j.include_library('export_widget.css');
-$j.include_library('bootstrap.min.js');
-$j.include_library('export_widget.js');
+$j.load_library('bootstrap.css');
+$j.load_library('bootstrap-theme.css');
+$j.load_library('export_widget.css');
+$j.load_library('bootstrap.js');
+$j.load_library('export_widget.js');
 </script>
 
-<div id='mainContainer' class="form-horizontal">
+<div id='ExportContainer' class="form-horizontal">
 	<legend class="text-center">Export</legend>
 
 	<div id="initDiv" class="text-center">
