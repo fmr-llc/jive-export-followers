@@ -78,6 +78,7 @@ Once the Export widget is set up, it will display four choices for you to look u
 * Place
 * Blog
 * Event
+
 Click one of the selections to limit the search to that type of content.  Next, type in the name of the content you wish to look up.  Note that this widget utilizes the Jive search API, so the same search idiosyncracies in the regular Jive search box must be taken into account here as well.  Click the Lookup button to search for results.  After searching, a ist of the related content matches will be displayed.  If you do not see your item of interest, refine your search and try again.  When you see your intended item, click it to highlight it, and click Export.  It will switch to a prcoessing spinner while the information is gathered and parsed into an export, and then the resuts will be displayed and highlighted for you.  At this point, it is best to copy the highlighted list, and save it to a CSV file on your computer (do not paste into Excel yet).  You can then open the CSV in Excel or similar to view and process the export.
 
 Issues
@@ -102,5 +103,5 @@ If you would like to contribute to this project, please check out [Contributing]
 
 License
 -------
-(c) 2015 Fidelity Investments
+(c) 2015-2016 Fidelity Investments
 Licensed under the [Apache License](docs/LICENSE), Version 2.0
