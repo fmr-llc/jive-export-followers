@@ -1,6 +1,6 @@
 Jive - Export Widget
 =======================
-The Export widget is a tool for looking up and exporting follower lists and event attendance details (including attendee emails).  This is a [Jive](https://community.jivesoftware.com/welcome) HTML widget project that utilizes the Jive V3 APIs to look up content information and parses the returned information for easier reading and exporting.  The Export widget utilizes [Bootstrap](http://getbootstrap.com) to create a clean user interface.
+The Export widget is a tool for looking up and exporting follower lists and event attendance details (including attendee emails).  This is a [Jive](https://community.jivesoftware.com/welcome) HTML widget project that utilizes the Jive V3 APIs to look up content information and parses the returned information for easier reading and exporting.  The Export widget utilizes [Bootstrap](http://getbootstrap.com) to create a self-service portal making it easy to support large community needs as well as fill in some needed functionality not in the base product.
 
 Prerequisite
 ------------
