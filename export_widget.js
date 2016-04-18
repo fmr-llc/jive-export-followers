@@ -1,7 +1,7 @@
 /* 
 Jive - Export Widget
 
-Copyright (c) 2015 Fidelity Investments
+Copyright (c) 2015-2016 Fidelity Investments
 Licensed under the Apache License, Version 2.0 (the "License");
 you may not use this file except in compliance with the License.
 You may obtain a copy of the License at
@@ -14,12 +14,8 @@ WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
 See the License for the specific language governing permissions and
 limitations under the License.
 
-FILE DESCRIPTION
-This is the CSS library that styles the Export widget.
-
-WIDGET DESCRIPTION
-This Jive HTML widget allows users to export followers for people and places as well as export 
-event attendee lists with the Jive email for each user.
+DESCRIPTION
+This Jive HTML widget allows users to export followers for people and places as well as export event attendee lists.
 */
 var fidosreg_id = 'b764a0a9536448345dc227af95e192521d337b5e4c3560c859b89ecd0407004a';
 var placeID = '';
@@ -56,6 +52,11 @@ function exportEvent() {
 	exportConfig();
 }
 
+function exportProjects() {
+	export_type = 'projects';
+	exportConfig();
+}
+
 function exportConfig() {
 	hideAll();
 	$j('#getContainerStatus').text('');
@@ -79,7 +80,7 @@ function lookup(){
 	$j('#getContainerStatus').text('Searching...');
 	$j('#getContainerStatus').css({'border-style': 'none' });
 	var searchURL = '/api/core/v3/search/';
-	if (export_type == 'place' || export_type == 'blog') {
+	if (export_type == 'place' || export_type == 'blog'|| export_type == 'projects') {
 		searchURL += 'places';
 	} else if (export_type == 'event' ) {
 		searchURL += 'contents';
@@ -98,15 +99,13 @@ function lookup(){
 		success: function (data) {
 			var object_list = "";
 			// process the search results into the select list.
-			if (export_type == 'place') {
+			if (export_type == 'place' || export_type == 'projects') {
 				$j(data.list).each(function(index, place){ 
 					object_list += '<a class="list-group-item" id="' + place.placeID + '">' + place.name + ' - ' + place.followerCount + ' followers</a>';
 				});
 			} else if (export_type == 'event') {
 				$j(data.list).each(function(index, event){
-					if (event.type == 'event') {
-						object_list += '<a class="list-group-item" id="' + event.contentID + '">' + event.subject + ' - ' + (event.attendance.yesAttendees.count + event.attendance.maybeAttendees.count) + ' - attendees</a>';
-					}
+					object_list += '<a class="list-group-item" id="' + event.contentID + '">' + event.subject + ' - ' + (event.attendance.yesAttendees.count + event.attendance.maybeAttendees.count) + ' - attendees</a>';
 				});
 			} else if (export_type == 'blog') {
 				$j(data.list).each(function(index, place){ 
@@ -190,13 +189,17 @@ function lookupEventAttendees(){
 function exportSet(iteration){
 	if (iteration == 0 && followers == '') {
 		followerCount = 0;
-		followers = '"CORP ID","NAME","EMAIL","RIBBIT ID"\n';
+		if ( export_type == 'projects' ) {
+			followers = '"PROJECT","START DATE"\n';
+		} else {
+			followers = '"CORP ID","NAME","EMAIL","RIBBIT ID"\n';
+		}
 	}
 	if (export_type == 'event') {
 		var url = eventLookup + '?count=' + max_export_count + '&startIndex=' + (iteration * max_export_count);
 	} else {
 		var url = '/api/core/v3/';
-		if (export_type == 'place'  | export_type == 'blog') {
+		if (export_type == 'place'  | export_type == 'blog' || export_type == 'projects') {
 			url += 'places';
 		} else {
 			url += 'people';
@@ -205,7 +208,11 @@ function exportSet(iteration){
 		if (export_type == 'person') {
 			url += '@';
 		}
-		url += 'followers?count=' + max_export_count + '&startIndex=' + (iteration * max_export_count);
+		if (export_type == 'projects') {
+			url += 'places?count=' + max_export_count + '&startIndex=' + (iteration * max_export_count);
+		} else {
+			url += 'followers?count=' + max_export_count + '&startIndex=' + (iteration * max_export_count);
+		}
 	}
 	$j.ajax({
 		type: "GET",
@@ -216,10 +223,14 @@ function exportSet(iteration){
 		success: function (data) {
 			if(data){
 				var count = 0;
-				$j(data.list).each(function(index, follower){
+				$j(data.list).each(function(index, item){
 					count += 1;
-					if (export_type != 'event') {
-						addFollower(follower);
+					if (export_type == 'projects' ) {
+						if (item.type == 'project') {
+							addProject(item);
+						}
+					} else if (export_type != 'event') {
+						addFollower(item);
 					} else {
 						$j.ajax({
 							type: "GET",
@@ -264,6 +275,11 @@ function addFollower(person) {
 		followers += person.emails[0].value;
 	}
 	followers +=  '",' + person.id + '\n';
+}
+
+function addProject(project) {
+	followerCount += 1;
+	followers += '"' + project.name + '","' + project.startDate.substring(0,10) + '"\n';
 }
 
 function exportComplete() {
