@@ -91,7 +91,7 @@ function lookup(){
 	if (export_type == 'event') {
 		searchURL += '&filter=type(event)'
 	}
-	searchURL += '&count=25';
+	searchURL += '&count=100';
 	$j.ajax({
 		type: 'GET',
 		url: searchURL,
@@ -101,7 +101,15 @@ function lookup(){
 			// process the search results into the select list.
 			if (export_type == 'place' || export_type == 'projects') {
 				$j(data.list).each(function(index, place){ 
-					object_list += '<a class="list-group-item" id="' + place.placeID + '">' + place.name + ' - ' + place.followerCount + ' followers</a>';
+					object_list += '<a class="list-group-item" title="' + place.description + '" id="' + place.placeID + '" ';
+					if (place.type == 'group') {
+						object_list += 'style="background-color: #ddb3da;"';
+					} else if (place.type == 'project') {
+						object_list += 'style="background-color: white;"';
+					} else {
+						object_list += 'style="background-color: #fde493;"';
+					}
+					object_list +=  '>' + place.name + ' - ' + place.followerCount + ' followers</a>';
 				});
 			} else if (export_type == 'event') {
 				$j(data.list).each(function(index, event){
@@ -234,7 +242,7 @@ function exportSet(iteration){
 					} else {
 						$j.ajax({
 							type: "GET",
-							url: '/api/core/v3/people/' + follower.id,
+							url: '/api/core/v3/people/' + item.id,
 							dataType: "json",
 							async: false,
 							success: function (person) {
